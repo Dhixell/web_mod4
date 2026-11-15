@@ -12,7 +12,7 @@ class MemberSeeder extends Seeder
      */
     public function run(): void
     {
-        Member::create(['name' => 'Alip Ganteng Banget Ya Ampun']);
+        Member::create(['name' => 'Alip Presiden Zimbabwe']);
         Member::create(['name' => 'Another Member']);
     }
 }
