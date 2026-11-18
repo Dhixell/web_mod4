@@ -16,6 +16,7 @@ return new class extends Migration
 
             // TODO 1: Tambahkan kolom 'name' bertipe string
             // Contoh format: $table->string('nama_kolom');
+            $table->string('name');
 
 
             $table->timestamps();

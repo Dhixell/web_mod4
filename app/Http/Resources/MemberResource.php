@@ -16,11 +16,8 @@ class MemberResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            // TODO: tambahkan field 'name' dari data member
-
-            // TODO: tambahkan field 'books' menggunakan whenLoaded('books')
-            // Contoh format bisa dilihat pada BookResource.php,
-            // bedanya di sini relasinya berupa banyak data (array), bukan satu.
+            'name' => $this->name,
+            'books' => BookResource::collection($this->whenLoaded('books')),
         ];
     }
 }

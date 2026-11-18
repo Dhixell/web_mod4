@@ -10,7 +10,7 @@ class Member extends Model
 {
     // TODO 2: Isi fillable dengan kolom yang boleh diisi melalui mass assignment
     // Contoh format: protected $fillable = ['kolom1', 'kolom2'];
-    protected $fillable = [];
+    protected $fillable = ['name'];
 
     /**
      * TODO 3: Definisikan relasi hasMany ke Model Book.
@@ -24,6 +24,6 @@ class Member extends Model
      */
     public function books()
     {
-        // Lengkapi baris ini
+        return $this->hasMany(Book::class);
     }
 }

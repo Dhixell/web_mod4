@@ -46,16 +46,26 @@ class MemberController extends Controller
         ]);
 
         // TODO: cari Book berdasarkan $request->book_id
-
+        $book = Book::findOrFail($request->book_id);
 
         // TODO: cek apakah buku masih tersedia (is_available)
-
+        if (!$book->is_available) {
+            return response()->json([
+                'message' => 'Buku sedang dipinjam',
+            ], 409);
+        }
 
         // TODO: update Book -> hubungkan ke member ini dan tandai tidak tersedia
-
+        $book->is_available = false;
+        $book->member_id = $member->id;
+        $book->save();
 
         // TODO: kembalikan response JSON, contoh:
         // return response()->json(['message' => 'Buku berhasil dipinjam']);
+        return response()->json([
+            'message' => 'Buku berhasil dipinjam',
+            'data' => $book,
+        ], 200);
     }
 
     /**
@@ -69,12 +79,22 @@ class MemberController extends Controller
     public function returnBook(Member $member, Book $book)
     {
         // TODO: cek apakah $book->member_id sama dengan $member->id
-
+        if ($book->member_id != $member->id) {
+            return response()->json([
+                'message' => 'Buku ini tidak sedang dipinjam oleh member tersebut',
+            ], 400);
+        }
 
         // TODO: update Book -> lepaskan relasi dan tandai tersedia kembali
-
+        $book->is_available = true;
+        $book->member_id = null;
+        $book->save();
 
         // TODO: kembalikan response JSON, contoh:
         // return response()->json(['message' => 'Buku berhasil dikembalikan']);
+        return response()->json([
+            'message' => 'Buku berhasil dikembalikan',
+            'data' => $book,
+        ], 200);
     }
 }

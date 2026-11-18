@@ -18,6 +18,12 @@ class DatabaseSeeder extends Seeder
             MemberSeeder::class,
         ]);
 
+        \App\Models\Book::firstOrCreate(['id' => 1], [
+            'title' => 'Laskar Pelangi',
+            'author' => 'Andrea Hirata',
+            'is_available' => true,
+        ]);
+
         // User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
